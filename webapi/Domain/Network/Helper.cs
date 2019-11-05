@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace webapi.Domain
+﻿namespace webapi.Domain.Network
 {
     public static class Helper
     {

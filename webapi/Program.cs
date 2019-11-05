@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Linq;
-using System.Reflection;
-using webapi.Domain;
+using webapi.Domain.Network;
 
 namespace webapi
 {
