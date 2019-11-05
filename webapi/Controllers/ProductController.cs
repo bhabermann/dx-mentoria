@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace webapi
+namespace webapi.Controllers
 {
     public class ProductController
     {
