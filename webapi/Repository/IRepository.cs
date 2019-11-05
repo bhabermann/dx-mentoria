@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace webapi
+namespace webapi.Repository
 {
     public interface IRepository<TEntity> where TEntity:class
     {
