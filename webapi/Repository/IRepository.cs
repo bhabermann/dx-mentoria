@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace webapi.Repository
 {
-    public interface IRepository<TEntity> where TEntity:class
+    public interface IRepository<TEntity> where TEntity : class
     {
         IEnumerable<TEntity> Get();
-        TEntity GetById(object id);
+        IEnumerable<TEntity> Get(Func<TEntity, bool> function);
         void Insert(TEntity entity);
-        void Update(TEntity entity);
-        void Delete(object id);
+        void Update(Predicate<TEntity> function, TEntity entity);
+        void Delete(Func<TEntity, bool> function);
     }
 }

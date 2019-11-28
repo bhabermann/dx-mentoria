@@ -25,11 +25,7 @@ namespace webapi.Domain.Network
 
             return new HTTPRequest(verb, uri, "");
         }
-        public string GetControllerNameFromRoute()
-            => _parts[1];
-        public string GetParameter()
-            => _parts[2];
-
-
+        public string GetControllerNameFromRoute() => _parts[1];
+        public string GetParameter() => _parts.Length == 3 ? _parts[2] : string.Empty;
     }
 }
