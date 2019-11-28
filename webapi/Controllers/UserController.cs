@@ -1,30 +1,48 @@
-﻿namespace webapi.Controllers
+﻿using Newtonsoft.Json;
+using webapi.Domain.Business;
+using webapi.Repository;
+
+namespace webapi.Controllers
 {
     public class UserController
     {
-        public string Get(string id)
+        private UserRepository userRepository = new UserRepository(); 
+
+
+        public string Get(int id)
         {
-            return $"Getting user number of ID '{id}'";
+            var user = userRepository.Get(x => x.Id == id);
+            var json = JsonConvert.SerializeObject(user);
+            return json;
         }
 
         public string Get()
         {
-            return $"Getting all users";
+            var user = userRepository.Get();
+            var json = JsonConvert.SerializeObject(user);
+            return json;
         }
 
         public string Post(string data)
         {
-            return $"Creating User from '{data}'";
+            var user = JsonConvert.DeserializeObject<User>(data);
+            userRepository.Insert(user);
+            var json = JsonConvert.SerializeObject(user);
+            return json;
         }
 
-        public string Put(string id, string data)
+        public string Put(int id, string data)
         {
-            return $"Updating User of ID '{id}' with '{data}'";
+            var user = JsonConvert.DeserializeObject<User>(data);
+            userRepository.Update(x => x.Id == id, user);
+            var json = JsonConvert.SerializeObject(user);
+            return json;
         }
 
-        public string Delete(string id)
+        public string Delete(int id)
         {
-            return $"Deleting User of ID '{id}'";
+            userRepository.Delete(x => x.Id == id);
+            return $"User deleted";
         }
     }
 }

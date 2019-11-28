@@ -21,7 +21,9 @@ namespace webapi.Domain.Network
         private static object ExecuteMethod(HTTPRequest request, Type controllerType)
         {
             var instance = Activator.CreateInstance(controllerType);
-            var returnValue = instance.GetType().GetMethods().FirstOrDefault(x =>x.Name == request.Method.ToPascalCase() && x.GetParameters().Count() > 0).Invoke(instance, new string[] { request.GetParameter() });
+            var methods = instance.GetType().GetMethods().Where(x => x.Name == request.Method.ToPascalCase()).ToArray();
+            var paramArray = request.GetParameters();
+            var returnValue = methods.FirstOrDefault(x => x.GetParameters().Count() == paramArray.Count()).Invoke(instance, paramArray);
             return returnValue;
         }
 
